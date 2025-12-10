@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clients & Contact | KAN Innovative Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { navy: '#1e1b4b', orange: '#ff6b35', yellow: '#ffb400' }, fontFamily: { sans: ['Inter', 'system-ui'] }}}}
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.27/dist/lenis.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #1e1b4b; /* navy */
+      --secondary-color: #ff6b35; /* orange */
+      --dark-text: #1e1b4b; /* navy */
+      --light-text: #ffffff; /* white */
+      --brand-blue: #1e1b4b; /* navy - used for button hover */
+    }
+    .cursor { pointer-events:none; position:fixed; width:20px; height:20px; background:#ff6b35; border-radius:50%; mix-blend-mode:difference; z-index:9999; top:-10px; left:-10px; transition:transform .1s; }
+    .cursor-follower { pointer-events:none; position:fixed; width:60px; height:60px; border:2px solid #ff6b35; border-radius:50%; z-index:9998; top:-30px; left:-30px; transition:all .4s cubic-bezier(.23,1,.32,1); }
+    .magnetic { transition:all .6s cubic-bezier(.23,1,.32,1); }
+
+    /* Glassmorphism Navigation */
+    .glass-nav {
+      background-color: rgba(243, 244, 246, 0.7); /* bg-gray-100 with 70% opacity */
+      backdrop-filter: blur(8px); /* backdrop-blur-md */
+      -webkit-backdrop-filter: blur(8px); /* For Safari */
+      /*
+        NOTE: You need to create 'assets/img/circuit-pattern.png'.
+        This image should be a seamlessly tileable circuit board pattern.
+        For example, a small (e.g., 100x100px) transparent PNG with white circuit lines.
+      */
+      background-image: url('assets/img/circuit-pattern.png');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-blend-mode: overlay; /* Blend mode for the pattern */
+      background-size: contain; /* Zooms in and fits within the nav height */
+    }
+    .hover-underline-grow::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4px;
+      display: block;
+      margin-top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff6b35; /* Project orange */
+      transition: width 0.3s ease-in-out;
+    }
+    .hover-underline-grow:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 overflow-x-hidden" style="zoom: 0.8;">
+  <div class="cursor"></div><div class="cursor-follower"></div>
+
+  <a href="https://wa.me/256774310287" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
+    <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..."/></svg>
+  </a>
+
+  <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14"/></a>
+      <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
+        <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
+        <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
+
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <a href="services.html" class="hover:text-orange transition flex items-center">
+            Services
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+            <div class="p-2">
+              <a href="services.html#digital-content" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital Content for Schools</a>
+              <a href="services.html#coding-robotics" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding & Robotics</a>
+              <a href="services.html#software-dev" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software Development</a>
+              <a href="services.html#cloud-services" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud Services</a>
+              <a href="services.html#consultancy" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy Services</a>
+              <a href="services.html#training" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management & Training</a>
+              <a href="services.html#hr-outsourcing" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT Outsourcing</a>
+              <a href="services.html#support" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical Support & Maintenance</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solutions Dropdown -->
+        <div class="relative group">
+          <a href="solutions.html" class="hover:text-orange transition flex items-center">
+            Solutions
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+            <div class="p-2">
+              <a href="solutions.html#smart-school" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart School Solutions</a>
+              <a href="solutions.html#video-conference" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video Conference Systems</a>
+              <a href="solutions.html#industry-solutions" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific Custom Solutions</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="products.html" class="relative hover-underline-grow hover:text-orange transition">Products</a>
+        <a href="clients.html" class="relative hover-underline-grow text-orange font-bold">Clients</a>
+      </div>
+      <a href="clients.html" class="bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get In Touch</a>
+    </div>
+  </nav>
+
+
+
+  <section class="pt-32 pb-20 text-center bg-gradient-to-br from-navy to-purple-900 text-white">
+    <h1 class="text-6xl md:text-8xl font-black mb-6" data-aos>Trusted by Leading Institutions</h1>
+  </section>
+
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
+      <img src="assets/img/clients/nabisunsa.png" alt="Nabisunsa" class="grayscale hover:grayscale-0 transition hover:scale-110" data-aos>
+      <img src="assets/img/clients/stmarys.png" alt="St Marys" class="grayscale hover:grayscale-0 transition hover:scale-110" data-aos data-aos-delay="100">
+      <img src="assets/img/clients/drc.png" alt="DRC" class="grayscale hover:grayscale-0 transition hover:scale-110" data-aos data-aos-delay="200">
+      <img src="assets/img/clients/eapil.png" alt="EAPIL" class="grayscale hover:grayscale-0 transition hover:scale-110" data-aos data-aos-delay="300">
+      <img src="assets/img/clients/isu.png" alt="ISU" class="grayscale hover:grayscale-0 transition hover:scale-110" data-aos data-aos-delay="400">
+      <!-- Add more logos -->
+    </div>
+  </section>
+
+<section class="section-container px-4 py-0">
+    <div class="contact-grid max-w-[1200px] mx-auto mb-20 grid gap-[50px] md:grid-cols-2 text-left">
+
+        <div class="contact-info-block">
+            <h4 class="text-3xl mb-6" style="color: var(--primary-color);">Our Contact Information</h4>
+            <p class="text-[1.2em] mb-10">Whether you're looking for a consultation, product details, or support, our team is here to help.</p>
+
+            <div class="contact-detail mb-7">
+                <strong class="block text-[1.1em] mb-1" style="color: var(--dark-text);">Office Location:</strong>
+                <p class="text-lg text-[#555]">Kyambogo Lower Estate Plot 5,</p>
+                <p class="text-lg text-[#555]">Essex Gardens Kampala, Uganda.</p>
+            </div>
+
+            <div class="contact-detail mb-7">
+                <strong class="block text-[1.1em] mb-1" style="color: var(--dark-text);">Primary Phone:</strong>
+                <p class="text-lg text-[#555]">+256 774 310 287</p>
+            </div>
+
+            <div class="contact-detail mb-7">
+                <strong class="block text-[1.1em] mb-1" style="color: var(--dark-text);">Alternate Phones:</strong>
+                <p class="text-lg text-[#555]">+256 783 437 108</p>
+                <p class="text-lg text-[#555]">+256 414 663 113</p>
+            </div>
+
+            <div class="contact-detail mb-7">
+                <strong class="block text-[1.1em] mb-1" style="color: var(--dark-text);">Email Address:</strong>
+                <p class="text-lg"><a href="mailto:sales@kaninnovativesolutions.com" class="font-bold" style="color: var(--secondary-color);">sales@kaninnovativesolutions.com</a></p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h4 class="text-3xl mb-6" style="color: var(--primary-color);">Send Us a Message</h4>
+            <div class="contact-form">
+                <form action="submit_form.php" method="POST" class="flex flex-col">
+                    <input type="text" name="name" placeholder="Your Name" required class="p-4 mb-5 border border-gray-300 rounded-md text-base w-full" />
+                    <input type="email" name="email" placeholder="Your Email" required class="p-4 mb-5 border border-gray-300 rounded-md text-base w-full" />
+                    <input type="text" name="subject" placeholder="Subject or Service Inquiry (e.g., Consultancy, Product Quote)" required class="p-4 mb-5 border border-gray-300 rounded-md text-base w-full" />
+                    <textarea name="message" placeholder="Your Message" required class="p-4 mb-5 border border-gray-300 rounded-md text-base w-full min-h-[150px] resize-y"></textarea>
+                    <button type="submit" class="py-3 px-8 font-extrabold rounded-md cursor-pointer transition-colors duration-300" style="background: var(--secondary-color); color: var(--dark-text);" onmouseover="this.style.background='var(--brand-blue)'; this.style.color='var(--light-text)';" onmouseout="this.style.background='var(--secondary-color)'; this.style.color='var(--dark-text)';">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- <div class="map-placeholder w-full h-[400px] bg-[#eee] mt-12 rounded-lg flex items-center justify-center text-[#888]"> -->
+
+    </div>
+
+</section>
+
+  <div class="h-screen bg-gray-200">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3376.739735489554!2d32.62504737411729!3d0.3404840996561896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbbd7dfc79371%3A0x3b7df36785080f58!2sLower%20Estate%20Kyambogo!5e1!3m2!1sen!2sug!4v1765358930365!5m2!1sen!2sug" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+  <!-- Footer (same) -->
+  <footer class="bg-navy text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+      <div><img src="assets/img/logo.png" class="h-14 mb-6"/><p>Delivering world-class technology solutions across Uganda and East Africa.</p></div>
+      <div><h4 class="font-bold text-yellow mb-4">Quick Links</h4><ul class="space-y-2"><li><a href="about.html" class="hover:text-orange">About</a></li><li><a href="services.html" class="hover:text-orange">Services</a></li><li><a href="products.html" class="hover:text-orange">Products</a></li></ul></div>
+      <div><h4 class="font-bold text-yellow mb-4">Contact</h4><p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala<br>+256 774 310 287<br>sales@kaninnovativesolutions.com</p></div>
+      <div><h4 class="font-bold text-yellow mb-4">Follow Us</h4><div class="flex space-x-4 text-3xl"><a href="#" class="hover:text-orange">f</a><a href="#" class="hover:text-orange">t</a><a href="#" class="hover:text-orange">in</a></div></div>
+    </div>
+    <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const lenis = new Lenis({duration:1.4, easing:(t)=>Math.min(1,1.001-Math.pow(2,-10*t))});
+    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
+    const cursor=document.querySelector('.cursor'), follower=document.querySelector('.cursor-follower');
+    document.addEventListener('mousemove',e=>{cursor.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;follower.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;});
+    document.querySelectorAll('.magnetic').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;gsap.to(b,{x:x*.4,y:y*.4,duration:.8,ease:"power3.out"})});b.addEventListener('mouseleave',()=>{gsap.to(b,{x:0,y:0,duration:.8})})});
+    gsap.utils.toArray('[data-aos]').forEach(el=>{gsap.from(el,{scrollTrigger:{trigger:el,start:"top 80%"},y:100,opacity:0,duration:1.2,ease:"power4.out",stagger:0.2})});
+  </script>
+</body>
+</html>
