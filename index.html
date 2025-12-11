@@ -1,10 +1,11 @@
-<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KAN Innovative Solutions | Uganda's Leading Tech Partner</title>
-  <meta name="description" content="Ugandan-owned ICT company delivering Smart Education, Enterprise IT, Cloud, Consultancy & Hardware Solutions."/>
+  <meta name="description"
+    content="Ugandan-owned ICT company delivering Smart Education, Enterprise IT, Cloud, Consultancy & Hardware Solutions." />
 
   <!-- Tailwind CDN (JIT mode) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,12 +18,20 @@
             orange: '#ff6b35',
             yellow: '#ffb400',
           },
-          fontFamily: { sans: ['Inter', 'system-ui'] }
+          fontFamily: {
+            sans: ['Inter', 'system-ui'],
+            serif: ['Playfair Display', 'serif']
+          }
         }
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- GSAP + Plugins -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -34,15 +43,45 @@
   <script src="https://unpkg.com/lenis@1.0.27/dist/lenis.min.js"></script>
 
   <style>
-    .cursor { pointer-events: none; position: fixed; top: -10px; left: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; mix-blend-mode: difference; z-index: 9999; transition: transform 0.1s; }
-    .cursor-follower { pointer-events: none; position: fixed; top: -30px; left: -30px; width: 60px; height: 60px; border: 2px solid #ff6b35; border-radius: 50%; z-index: 9998; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
-    .magnetic { transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+    .cursor {
+      pointer-events: none;
+      position: fixed;
+      top: -10px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      background: #ff6b35;
+      border-radius: 50%;
+      mix-blend-mode: difference;
+      z-index: 9999;
+      transition: transform 0.1s;
+    }
+
+    .cursor-follower {
+      pointer-events: none;
+      position: fixed;
+      top: -30px;
+      left: -30px;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #ff6b35;
+      border-radius: 50%;
+      z-index: 9998;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .magnetic {
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
 
     /* Glassmorphism Navigation */
     .glass-nav {
-      background-color: rgba(243, 244, 246, 0.7); /* bg-gray-100 with 70% opacity */
-      backdrop-filter: blur(8px); /* backdrop-blur-md */
-      -webkit-backdrop-filter: blur(8px); /* For Safari */
+      background-color: rgba(243, 244, 246, 0.7);
+      /* bg-gray-100 with 70% opacity */
+      backdrop-filter: blur(8px);
+      /* backdrop-blur-md */
+      -webkit-backdrop-filter: blur(8px);
+      /* For Safari */
       /*
         NOTE: You need to create 'assets/img/circuit-pattern.png'.
         This image should be a seamlessly tileable circuit board pattern.
@@ -51,9 +90,12 @@
       background-image: url('assets/img/circuit-pattern.png');
       background-repeat: no-repeat;
       background-position: right center;
-      background-blend-mode: overlay; /* Blend mode for the pattern */
-      background-size: contain; /* Zooms in and fits within the nav height */
+      background-blend-mode: overlay;
+      /* Blend mode for the pattern */
+      background-size: contain;
+      /* Zooms in and fits within the nav height */
     }
+
     .hover-underline-grow::after {
       content: '';
       position: absolute;
@@ -63,27 +105,157 @@
       margin-top: 5px;
       left: 50%;
       transform: translateX(-50%);
-      background: #ff6b35; /* Project orange */
+      background: #ff6b35;
+      /* Project orange */
       transition: width 0.3s ease-in-out;
     }
+
     .hover-underline-grow:hover::after {
       width: 100%;
     }
+
     /* Typewriter – cursor disappears when done */
-    .typewriter-text { /* Changed from #typewriter to .typewriter-text for reusability */
+    .typewriter-text {
+      /* Changed from #typewriter to .typewriter-text for reusability */
       display: inline-block;
-      border-right: 0.2em solid #ff6b35; /* Project orange */
+      border-right: 0.2em solid #ff6b35;
+      /* Project orange */
       white-space: normal;
       line-height: 1.3;
       animation: blink 0.8s step-end infinite;
     }
+
     .typewriter-text.done {
       border-right: none;
       animation: none;
     }
-    @keyframes blink { 50% { border-color: transparent; } }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* Hero Typing Cursor */
+    .typing-cursor::after {
+      content: '|';
+      color: #ff6b35;
+      animation: cursor-blink 0.8s infinite;
+    }
+
+    .typing-cursor.done::after {
+      content: '';
+      animation: none;
+    }
+
+    @keyframes cursor-blink {
+
+      0%,
+      50% {
+        opacity: 1;
+      }
+
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Mobile menu (minimal, plain CSS/JS) */
+    .hamburger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .hamburger:focus {
+      outline: 2px solid #ff6b35;
+      outline-offset: 2px;
+    }
+
+    .hamburger:hover {
+      background: #f3f4f6;
+    }
+
+    .mobile-panel {
+      position: fixed;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 107, 53, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 50;
+    }
+
+    @supports (backdrop-filter: blur(4px)) {
+      .mobile-panel {
+        backdrop-filter: blur(4px);
+      }
+    }
+
+    @supports not (backdrop-filter: blur(4px)) {
+      .mobile-panel {
+        background: #ff6b35;
+      }
+    }
+
+    .mobile-panel {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 0s linear 200ms;
+    }
+
+    .mobile-panel.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 200ms ease-out, transform 200ms ease-out;
+    }
+
+    .mobile-nav {
+      padding: 0.75rem 1rem;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      color: #111827;
+      text-decoration: none;
+    }
+
+    .mobile-nav a:hover,
+    .mobile-nav a:focus {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      .mobile-panel {
+        display: none;
+      }
+    }
   </style>
 </head>
+
 <body class="bg-white text-gray-900 overflow-x-hidden" style="zoom: 0.8;">
 
   <!-- Custom Cursor -->
@@ -91,33 +263,54 @@
   <div class="cursor-follower"></div>
 
   <!-- Floating WhatsApp -->
-  <a href="https://wa.me/256774310287" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition">
-    <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..."/></svg>
+  <a href="https://wa.me/256774310287" target="_blank"
+    class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition">
+    <i class="fab fa-whatsapp text-4xl"></i>
   </a>
 
   <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-    <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-20 md:h-14"/></a>
-      <div class="hidden md:flex items-center space-x-12 text-xl font-medium">
-        <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
+      <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
+      <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
+        <a href="index.html" class="relative hover-underline-grow text-orange font-bold">Home</a>
         <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
 
         <!-- Services Dropdown -->
         <div class="relative group">
           <a href="services.html" class="hover:text-orange transition flex items-center">
             Services
-            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
           </a>
-          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-            <div class="p-3">
-              <a href="services.html#digital-content" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Digital Content for Schools</a>
-              <a href="services.html#coding-robotics" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Coding & Robotics</a>
-              <a href="services.html#software-dev" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Software Development</a>
-              <a href="services.html#cloud-services" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Cloud Services</a>
-              <a href="services.html#consultancy" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Consultancy Services</a>
-              <a href="services.html#training" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Management & Training</a>
-              <a href="services.html#hr-outsourcing" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">HR IT Outsourcing</a>
-              <a href="services.html#support" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Technical Support & Maintenance</a>
+          <div
+            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+            <div class="p-2">
+              <a href="services.html#digital-content"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital
+                Content for Schools</a>
+              <a href="services.html#coding-robotics"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding &
+                Robotics</a>
+              <a href="services.html#software-dev"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software
+                Development</a>
+              <a href="services.html#cloud-services"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud
+                Services</a>
+              <a href="services.html#consultancy"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy
+                Services</a>
+              <a href="services.html#training"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management
+                & Training</a>
+              <a href="services.html#hr-outsourcing"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT
+                Outsourcing</a>
+              <a href="services.html#support"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical
+                Support & Maintenance</a>
             </div>
           </div>
         </div>
@@ -126,13 +319,23 @@
         <div class="relative group">
           <a href="solutions.html" class="hover:text-orange transition flex items-center">
             Solutions
-            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
           </a>
-          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-            <div class="p-3">
-              <a href="solutions.html#smart-school" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Smart School Solutions</a>
-              <a href="solutions.html#video-conference" class="relative hover-underline-grow block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Video Conference Systems</a>
-              <a href="solutions.html#industry-solutions" class="block px-5 py-3 text-lg text-gray-800 hover:text-navy rounded-md">Industry-Specific Custom Solutions</a>
+          <div
+            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+            <div class="p-2">
+              <a href="solutions.html#smart-school"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart
+                School Solutions</a>
+              <a href="solutions.html#video-conference"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video
+                Conference Systems</a>
+              <a href="solutions.html#industry-solutions"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific
+                Custom Solutions</a>
             </div>
           </div>
         </div>
@@ -140,150 +343,256 @@
         <a href="products.html" class="relative hover-underline-grow hover:text-orange transition">Products</a>
         <a href="clients.html" class="relative hover-underline-grow hover:text-orange transition">Clients</a>
       </div>
-      <a href="clients.html" class="bg-orange text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-yellow transition magnetic">Get In Touch</a>
+      <!-- Mobile hamburger button -->
+      <button id="mobile-menu-button" class="hamburger md:hidden" aria-controls="mobile-menu" aria-expanded="false"
+        aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <a href="clients.html"
+        class="hidden md:inline-block bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get
+        In Touch</a>
+    </div>
   </nav>
 
-
+  <!-- Mobile panel -->
+  <div id="mobile-menu" class="mobile-panel md:hidden" role="menu" aria-hidden="true">
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="index.html" role="menuitem" tabindex="-1">Home</a></li>
+        <li><a href="about.html" role="menuitem" tabindex="-1">About</a></li>
+        <li><a href="services.html" role="menuitem" tabindex="-1">Services</a></li>
+        <li><a href="solutions.html" role="menuitem" tabindex="-1">Solutions</a></li>
+        <li><a href="products.html" role="menuitem" tabindex="-1">Products</a></li>
+        <li><a href="clients.html" role="menuitem" tabindex="-1">Clients</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <!-- Page Content Starts Here -->
-     <!-- HERO -->
-  <section class="h-screen flex items-center justify-center relative bg-gradient-to-br from-navy via-purple-900 to-navy text-white overflow-hidden">
-    <div class="absolute inset-0 bg-black/30"></div>
-    <img src="assets/img/hero.jpg" alt="Hero" class="absolute inset-0 w-full h-full object-cover opacity-40">
+  <main class="pt-24">
+    <!-- HERO -->
+    <section
+      class="h-screen flex items-center justify-center relative bg-gradient-to-br from-navy via-purple-900 to-navy text-white overflow-hidden">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <img src="assets/img/circ.png" alt="Hero" class="absolute inset-0 w-full h-full object-cover opacity-40 ">
 
-    <div class="relative text-center px-6 z-10">
-    <div class="mb-12"></div>
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mt-20">
-      <span class="block" data-aos>Empowering Uganda</span>
-      <span class="block text-yellow" data-aos data-aos-delay="300">Through Innovation</span>
-    </h1>
-      <p class="mt-8 text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
-        Your trusted Ugandan partner in Smart Education, Enterprise IT, Cloud Solutions & Modern Infrastructure
-      </p>
-      <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
-        <a href="services.html" class="magnetic inline-block px-12 py-5 bg-orange text-white text-xl font-bold rounded-full hover:bg-yellow transition transform hover:scale-105">Explore Solutions</a>
-        <a href="clients.html" class="magnetic inline-block px-12 py-5 border-2 border-white text-white text-xl font-bold rounded-full hover:bg-white hover:text-navy transition">Contact Us</a>
-      </div>
-    </div>
-
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer" onclick="lenis.scrollTo('#quick-stats')">
-      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-    </div>
-  </section>
-
-  <!-- Quick Stats -->
-  <section class="py-20 bg-gray-50" id="quick-stats-section">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-      <div><h3 class="text-5xl font-black text-orange">50+</h3><p class="text-lg mt-2">Happy Clients</p></div>
-      <div><h3 class="text-5xl font-black text-orange">200+</h3><p class="text-lg mt-2">Classrooms Transformed</p></div>
-      <div><h3 class="text-5xl font-black text-orange">8+</h3><p class="text-lg mt-2">Years Experience</p></div>
-      <div><h3 class="text-5xl font-black text-orange">100%</h3><p class="text-lg mt-2">Ugandan Owned</p></div>
-    </div>
-  </section>
-
-  <!-- Footer (same on every page) -->
-  <footer class="bg-navy text-white py-16">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
-      <div>
-        <img src="assets/img/logo.png" class="h-14 mb-6"/>
-        <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
-      </div>
-      <div>
-        <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
-        <ul class="space-y-2"><li><a href="about.html" class="hover:text-orange">About Us</a></li><li><a href="services.html" class="hover:text-orange">Services</a></li><li><a href="products.html" class="hover:text-orange">Products</a></li></ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-yellow mb-4">Contact</h4>
-        <p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala</p>
-        <p class="mt-4">+256 774 310 287<br>+256 783 437 108</p>
-        <p class="mt-4">sales@kaninnovativesolutions.com</p>
-      </div>
-      <div>
-        <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
-        <div class="flex space-x-4 text-3xl">
-          <a href="#" class="hover:text-orange">f</a>
-          <a href="#" class="hover:text-orange">t</a>
-          <a href="#" class="hover:text-orange">in</a>
+      <div class="relative text-center px-6 z-10">
+        <div class="mb-12"></div>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mt-20 font-serif">
+          <span class="block">Empowering Uganda</span>
+          <span class="block text-yellow">Through Innovation</span>
+        </h1>
+        <p class="mt-8 text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
+          Your trusted Ugandan partner in Smart Education, Enterprise IT, Cloud Solutions & Modern Infrastructure
+        </p>
+        <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+          <a href="services.html"
+            class="magnetic inline-block px-12 py-5 bg-orange text-white text-xl font-bold rounded-full hover:bg-yellow transition transform hover:scale-105">Explore
+            Solutions</a>
+          <a href="clients.html"
+            class="magnetic inline-block px-12 py-5 border-2 border-white text-white text-xl font-bold rounded-full hover:bg-white hover:text-navy transition">Contact
+            Us</a>
         </div>
       </div>
-    </div>
-    <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
-  </footer>
 
-  <!-- Scripts (same on every page) -->
-  <script>
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
+        onclick="lenis.scrollTo('#quick-stats')">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </section>
 
-    const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
+    <!-- Quick Stats -->
+    <section class="py-20 bg-gray-50" id="quick-stats-section">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+        <div>
+          <h3 class="text-5xl font-black text-orange">50+</h3>
+          <p class="text-lg mt-2">Happy Clients</p>
+        </div>
+        <div>
+          <h3 class="text-5xl font-black text-orange">200+</h3>
+          <p class="text-lg mt-2">Classrooms Transformed</p>
+        </div>
+        <div>
+          <h3 class="text-5xl font-black text-orange">8+</h3>
+          <p class="text-lg mt-2">Years Experience</p>
+        </div>
+        <div>
+          <h3 class="text-5xl font-black text-orange">100%</h3>
+          <p class="text-lg mt-2">Ugandan Owned</p>
+        </div>
+      </div>
+    </section>
 
-    // Custom cursor
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
-    document.addEventListener('mousemove', e => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-      follower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    });
+    <!-- Footer (same on every page) -->
+    <footer class="bg-navy text-white py-16">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+        <div>
+          <img src="assets/img/logo.png" class="h-14 mb-6" />
+          <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="hover:text-orange">About Us</a></li>
+            <li><a href="services.html" class="hover:text-orange">Services</a></li>
+            <li><a href="products.html" class="hover:text-orange">Products</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-yellow mb-4">Contact</h4>
+          <p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala</p>
+          <p class="mt-4">+256 774 310 287<br>+256 783 437 108</p>
+          <p class="mt-4">sales@kaninnovativesolutions.com</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
+          <div class="flex space-x-4 text-3xl">
+            <a href="#" class="hover:text-orange transition"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-orange transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-orange transition"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
+    </footer>
 
-    // Magnetic buttons
-    document.querySelectorAll('.magnetic').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.8, ease: "power3.out" });
+    <!-- Scripts (same on every page) -->
+    <script>
+
+      const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+
+      // Custom cursor
+      const cursor = document.querySelector('.cursor');
+      const follower = document.querySelector('.cursor-follower');
+      document.addEventListener('mousemove', e => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        follower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       });
-      btn.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.8 }));
-    });
 
-    // Text reveal
-    gsap.utils.toArray('[data-aos]').forEach(el => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: "top 80%" },
-        y: 100, opacity: 0, duration: 1.2, ease: "power4.out", stagger: 0.2
+      // Magnetic buttons
+      document.querySelectorAll('.magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.8, ease: "power3.out" });
+        });
+        btn.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.8 }));
       });
-    });
 
-    // Typing animation for Quick Stats
-    gsap.utils.toArray("#quick-stats-section h3").forEach(h3 => {
-      const originalText = h3.innerText;
-      // Wrap the text in a span for the typewriter effect
-      h3.innerHTML = `<span class="typewriter-text">${originalText}</span>`;
-      const typewriterSpan = h3.querySelector(".typewriter-text");
+      // Text reveal
+      gsap.utils.toArray('[data-aos]').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 80%" },
+          y: 100, opacity: 0, duration: 1.2, ease: "power4.out", stagger: 0.2
+        });
+      });
 
-      // Temporarily remove the blinking animation while typing
-      typewriterSpan.style.borderRight = "none";
-      typewriterSpan.style.animation = "none";
 
-      let currentLength = 0;
-      // Use a proxy object for animation progress
-      const proxy = { length: 0 };
-
-      gsap.to(proxy, {
-        length: originalText.length,
-        duration: 1.5, // Typing speed
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#quick-stats-section",
-          start: "top center",
-          toggleActions: "play none none none",
-          once: true
-        },
-        onStart: () => {
-          // Add the blinking cursor when animation starts
-          typewriterSpan.style.borderRight = "0.2em solid #ff6b35";
-          typewriterSpan.style.animation = "blink 0.8s step-end infinite";
-        },
-        onUpdate: () => {
-          currentLength = Math.round(proxy.length);
-          typewriterSpan.innerText = originalText.substring(0, currentLength);
-        },
-        onComplete: () => {
-          // Remove the blinking cursor when animation is complete
-          typewriterSpan.classList.add("done");
+      /* ========== ANIMATIONS DEACTIVATED ==========
+      // ========== HERO TYPING ANIMATION WITH CURSOR ==========
+      function typeWriter(element, text, speed, callback) {
+        let i = 0;
+        element.classList.add('typing-cursor'); // Add blinking cursor
+  
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else {
+            element.classList.remove('typing-cursor'); // Remove cursor when done
+            element.classList.add('done');
+            if (callback) callback();
+          }
+        }
+  
+        type();
+      }
+  
+      // Start animations when DOM is ready
+      document.addEventListener('DOMContentLoaded', function () {
+        console.log('DOM loaded - starting animations');
+  
+        // TYPING ANIMATION
+        const line1 = document.getElementById('hero-line1');
+        const line2 = document.getElementById('hero-line2');
+  
+        if (line1 && line2) {
+          console.log('Hero lines found, starting typing...');
+          const text1 = line1.getAttribute('data-text');
+          const text2 = line2.getAttribute('data-text');
+  
+          // Type first line
+          typeWriter(line1, text1, 60, function () {
+            // After first line, wait then type second line
+            setTimeout(function () {
+              typeWriter(line2, text2, 60);
+            }, 400);
+          });
+        } else {
+          console.log('Hero lines NOT found');
+        }
+  
+        // COUNT-UP ANIMATION FOR STATS
+        const statNumbers = document.querySelectorAll('.stat-number');
+        console.log('Found', statNumbers.length, 'stat numbers');
+  
+        if (statNumbers.length > 0) {
+          // Wait a bit before starting count-up
+          setTimeout(function () {
+            statNumbers.forEach((stat, index) => {
+              const target = parseInt(stat.getAttribute('data-count'));
+              console.log('Animating stat', index, 'to', target);
+  
+              let current = 0;
+              const increment = target / 50; // 50 steps
+              const duration = 2000; // 2 seconds total
+              const stepTime = duration / 50;
+  
+              const counter = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  current = target;
+                  clearInterval(counter);
+                }
+  
+                // Format the number with + or %
+                const isLastStat = index === 3;
+                stat.textContent = Math.floor(current) + (isLastStat ? '%' : '+');
+              }, stepTime);
+            });
+          }, 1000); // Start after 1 second
         }
       });
-    });
-  </script>
+      ========== END DEACTIVATED ANIMATIONS ========== */
+
+
+    </script>
+    <!-- Mobile menu JS -->
+    <script>
+      (function () {
+        const btn = document.getElementById('mobile-menu-button');
+        const panel = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        if (!btn || !panel || !nav) return;
+        let isOpen = false;
+        const getItems = () => panel.querySelectorAll('[role="menuitem"]');
+        function openMenu() { if (isOpen) return; panel.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); panel.setAttribute('aria-hidden', 'false'); const items = getItems(); if (items.length) items[0].focus(); document.body.classList.add('no-scroll'); document.addEventListener('click', outside); document.addEventListener('keydown', key); window.addEventListener('resize', resize); isOpen = true; }
+        function closeMenu() { if (!isOpen) return; panel.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); panel.setAttribute('aria-hidden', 'true'); document.body.classList.remove('no-scroll'); document.removeEventListener('click', outside); document.removeEventListener('keydown', key); window.removeEventListener('resize', resize); btn.focus(); isOpen = false; }
+        function outside(e) { if (!nav.contains(e.target) && !panel.contains(e.target)) closeMenu(); }
+        function key(e) { if (e.key === 'Escape') { closeMenu(); return; } if (e.key === 'Tab' && isOpen) { const items = Array.from(getItems()); if (!items.length) return; const first = items[0], last = items[items.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } } }
+        function resize() { if (window.innerWidth >= 768) closeMenu(); }
+        btn.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+      })();
+    </script>
 </body>
+
 </html>

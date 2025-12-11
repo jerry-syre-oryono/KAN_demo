@@ -1,10 +1,12 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KAN Innovative Solutions | Uganda's Leading Tech Partner</title>
-  <meta name="description" content="Ugandan-owned ICT company delivering Smart Education, Enterprise IT, Cloud, Consultancy & Hardware Solutions."/>
+  <meta name="description"
+    content="Ugandan-owned ICT company delivering Smart Education, Enterprise IT, Cloud, Consultancy & Hardware Solutions." />
 
   <!-- Tailwind CDN (JIT mode) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +24,11 @@
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- GSAP + Plugins -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -33,15 +39,45 @@
   <script src="https://unpkg.com/lenis@1.0.27/dist/lenis.min.js"></script>
 
   <style>
-    .cursor { pointer-events: none; position: fixed; top: -10px; left: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; mix-blend-mode: difference; z-index: 9999; transition: transform 0.1s; }
-    .cursor-follower { pointer-events: none; position: fixed; top: -30px; left: -30px; width: 60px; height: 60px; border: 2px solid #ff6b35; border-radius: 50%; z-index: 9998; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
-    .magnetic { transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+    .cursor {
+      pointer-events: none;
+      position: fixed;
+      top: -10px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      background: #ff6b35;
+      border-radius: 50%;
+      mix-blend-mode: difference;
+      z-index: 9999;
+      transition: transform 0.1s;
+    }
+
+    .cursor-follower {
+      pointer-events: none;
+      position: fixed;
+      top: -30px;
+      left: -30px;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #ff6b35;
+      border-radius: 50%;
+      z-index: 9998;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .magnetic {
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
 
     /* Glassmorphism Navigation */
     .glass-nav {
-      background-color: rgba(243, 244, 246, 0.7); /* bg-gray-100 with 70% opacity */
-      backdrop-filter: blur(8px); /* backdrop-blur-md */
-      -webkit-backdrop-filter: blur(8px); /* For Safari */
+      background-color: rgba(243, 244, 246, 0.7);
+      /* bg-gray-100 with 70% opacity */
+      backdrop-filter: blur(8px);
+      /* backdrop-blur-md */
+      -webkit-backdrop-filter: blur(8px);
+      /* For Safari */
       /*
         NOTE: You need to create 'assets/img/circuit-pattern.png'.
         This image should be a seamlessly tileable circuit board pattern.
@@ -50,9 +86,12 @@
       background-image: url('assets/img/circuit-pattern.png');
       background-repeat: no-repeat;
       background-position: right center;
-      background-blend-mode: overlay; /* Blend mode for the pattern */
-      background-size: contain; /* Zooms in and fits within the nav height */
+      background-blend-mode: overlay;
+      /* Blend mode for the pattern */
+      background-size: contain;
+      /* Zooms in and fits within the nav height */
     }
+
     .hover-underline-grow::after {
       content: '';
       position: absolute;
@@ -62,14 +101,110 @@
       margin-top: 5px;
       left: 50%;
       transform: translateX(-50%);
-      background: #ff6b35; /* Project orange */
+      background: #ff6b35;
+      /* Project orange */
       transition: width 0.3s ease-in-out;
     }
+
     .hover-underline-grow:hover::after {
       width: 100%;
     }
+
+    /* Mobile menu (minimal, plain CSS/JS) */
+    .hamburger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .hamburger:focus {
+      outline: 2px solid #ff6b35;
+      outline-offset: 2px;
+    }
+
+    .hamburger:hover {
+      background: #f3f4f6;
+    }
+
+    .mobile-panel {
+      position: fixed;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 107, 53, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 50;
+    }
+
+    @supports (backdrop-filter: blur(4px)) {
+      .mobile-panel {
+        backdrop-filter: blur(4px);
+      }
+    }
+
+    @supports not (backdrop-filter: blur(4px)) {
+      .mobile-panel {
+        background: #ff6b35;
+      }
+    }
+
+    .mobile-panel {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 0s linear 200ms;
+    }
+
+    .mobile-panel.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 200ms ease-out, transform 200ms ease-out;
+    }
+
+    .mobile-nav {
+      padding: 0.75rem 1rem;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      color: #111827;
+      text-decoration: none;
+    }
+
+    .mobile-nav a:hover,
+    .mobile-nav a:focus {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      .mobile-panel {
+        display: none;
+      }
+    }
   </style>
 </head>
+
 <body class="bg-white text-gray-900 overflow-x-hidden" style="zoom: 0.8;">
 
   <!-- Custom Cursor -->
@@ -77,34 +212,54 @@
   <div class="cursor-follower"></div>
 
   <!-- Floating WhatsApp -->
-  <a href="https://wa.me/256774310287" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition">
-    <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..."/></svg>
+  <a href="https://wa.me/256774310287" target="_blank"
+    class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition">
+    <i class="fab fa-whatsapp text-4xl"></i>
   </a>
 
-  <!-- Navigation -->
   <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14"/></a>
+      <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
       <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
         <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
         <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
 
         <!-- Services Dropdown -->
         <div class="relative group">
-          <a href="services.html" class="hover:text-orange transition flex items-center">
+          <a href="services.html" class="relative hover-underline-grow text-orange font-bold flex items-center">
             Services
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
           </a>
-          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+          <div
+            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
             <div class="p-2">
-              <a href="services.html#digital-content" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital Content for Schools</a>
-              <a href="services.html#coding-robotics" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding & Robotics</a>
-              <a href="services.html#software-dev" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software Development</a>
-              <a href="services.html#cloud-services" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud Services</a>
-              <a href="services.html#consultancy" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy Services</a>
-              <a href="services.html#training" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management & Training</a>
-              <a href="services.html#hr-outsourcing" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT Outsourcing</a>
-              <a href="services.html#support" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical Support & Maintenance</a>
+              <a href="services.html#digital-content"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital
+                Content for Schools</a>
+              <a href="services.html#coding-robotics"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding &
+                Robotics</a>
+              <a href="services.html#software-dev"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software
+                Development</a>
+              <a href="services.html#cloud-services"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud
+                Services</a>
+              <a href="services.html#consultancy"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy
+                Services</a>
+              <a href="services.html#training"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management
+                & Training</a>
+              <a href="services.html#hr-outsourcing"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT
+                Outsourcing</a>
+              <a href="services.html#support"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical
+                Support & Maintenance</a>
             </div>
           </div>
         </div>
@@ -113,13 +268,23 @@
         <div class="relative group">
           <a href="solutions.html" class="hover:text-orange transition flex items-center">
             Solutions
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
           </a>
-          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+          <div
+            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
             <div class="p-2">
-              <a href="solutions.html#smart-school" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart School Solutions</a>
-              <a href="solutions.html#video-conference" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video Conference Systems</a>
-              <a href="solutions.html#industry-solutions" class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific Custom Solutions</a>
+              <a href="solutions.html#smart-school"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart
+                School Solutions</a>
+              <a href="solutions.html#video-conference"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video
+                Conference Systems</a>
+              <a href="solutions.html#industry-solutions"
+                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific
+                Custom Solutions</a>
             </div>
           </div>
         </div>
@@ -127,202 +292,308 @@
         <a href="products.html" class="relative hover-underline-grow hover:text-orange transition">Products</a>
         <a href="clients.html" class="relative hover-underline-grow hover:text-orange transition">Clients</a>
       </div>
-      <a href="clients.html" class="bg-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-yellow transition magnetic">Get In Touch</a>
+      <!-- Mobile hamburger button -->
+      <button id="mobile-menu-button" class="hamburger md:hidden" aria-controls="mobile-menu" aria-expanded="false"
+        aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <a href="clients.html"
+        class="hidden md:inline-block bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get
+        In Touch</a>
     </div>
   </nav>
 
+  <!-- Mobile panel -->
+  <div id="mobile-menu" class="mobile-panel md:hidden" role="menu" aria-hidden="true">
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="index.html" role="menuitem" tabindex="-1">Home</a></li>
+        <li><a href="about.html" role="menuitem" tabindex="-1">About</a></li>
+        <li><a href="services.html" role="menuitem" tabindex="-1">Services</a></li>
+        <li><a href="solutions.html" role="menuitem" tabindex="-1">Solutions</a></li>
+        <li><a href="products.html" role="menuitem" tabindex="-1">Products</a></li>
+        <li><a href="clients.html" role="menuitem" tabindex="-1">Clients</a></li>
+      </ul>
+    </nav>
+  </div>
 
 
 
-  <main class="pt-24">
-<section id="digital-content" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+
+  <main class="pt-28">
+    <section id="digital-content" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/digital-content.jpg" alt="Digital Content" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/digital-content.jpg" alt="Digital Content" class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="digital-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Digital Content for Schools</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Engaging and Interactive Learning Resources</p>
-            <p class="mt-5" style="margin-top: 20px;">We provide engaging and interactive digital content for schools, including animated science lessons, interactive assessments, and practical simulations to enhance the learning experience.</p>
+          <h2 id="digital-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">
+            Digital Content for Schools</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Engaging and Interactive Learning Resources</p>
+          <p class="mt-5" style="margin-top: 20px;">We provide engaging and interactive digital content for schools,
+            including animated science lessons, interactive assessments, and practical simulations to enhance the
+            learning experience.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Interactive Lessons and Assessments</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Animated Science Content</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Practical Simulations for Enhanced Learning</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Comprehensive Learning Experience</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Interactive
+              Lessons and Assessments</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Animated
+              Science Content</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Practical
+              Simulations for Enhanced Learning</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Comprehensive Learning Experience
+            </li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="coding-robotics" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="coding-robotics" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/coding-robotics.jpg" alt="Coding & Robotics" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/coding-robotics.jpg" alt="Coding & Robotics"
+            class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="coding-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Coding & Robotics</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Empowering Future Innovators</p>
-            <p class="mt-5" style="margin-top: 20px;">Our coding and robotics programs are designed to equip students with the skills of the future, fostering creativity, problem-solving, and critical thinking.</p>
+          <h2 id="coding-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">
+            Coding & Robotics</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Empowering Future Innovators</p>
+          <p class="mt-5" style="margin-top: 20px;">Our coding and robotics programs are designed to equip students with
+            the skills of the future, fostering creativity, problem-solving, and critical thinking.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Future-Proof Skills for Students</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Fosters Creativity and Innovation</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Develops Problem-Solving Abilities</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Critical Thinking and Digital Literacy</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Future-Proof
+              Skills for Students</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Fosters
+              Creativity and Innovation</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Develops
+              Problem-Solving Abilities</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Critical Thinking and Digital
+              Literacy</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="software-dev" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="software-dev" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/software-dev.jpg" alt="Software Development" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/software-dev.jpg" alt="Software Development"
+            class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="software-dev-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Software Development</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Custom Solutions for Your Business Needs</p>
-            <p class="mt-5" style="margin-top: 20px;">We develop custom software solutions to meet the unique needs of your business, from web applications to mobile apps, ensuring scalability and performance.</p>
+          <h2 id="software-dev-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy"
+            style="margin-bottom: 10px;">Software Development</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Custom Solutions for Your Business Needs</p>
+          <p class="mt-5" style="margin-top: 20px;">We develop custom software solutions to meet the unique needs of
+            your business, from web applications to mobile apps, ensuring scalability and performance.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Tailored Web Applications</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Mobile App Development</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Ensuring Scalability and Performance</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Meeting Unique Business Requirements</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Tailored Web
+              Applications</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Mobile App
+              Development</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Ensuring
+              Scalability and Performance</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Meeting Unique Business
+              Requirements</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="cloud-services" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="cloud-services" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/cloud-services.jpg" alt="Cloud Services" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/cloud-services.jpg" alt="Cloud Services" class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="cloud-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Cloud Services</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Leverage the Power of the Cloud</p>
-            <p class="mt-5" style="margin-top: 20px;">We offer a range of cloud services, including cloud migration, infrastructure management, and data storage solutions, to help you leverage the power of the cloud.</p>
+          <h2 id="cloud-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Cloud
+            Services</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Leverage the Power of the Cloud</p>
+          <p class="mt-5" style="margin-top: 20px;">We offer a range of cloud services, including cloud migration,
+            infrastructure management, and data storage solutions, to help you leverage the power of the cloud.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Cloud Migration and Infrastructure Management</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Secure Data Storage Solutions</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Scalable and Flexible Cloud Solutions</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Maximize Efficiency and Reduce Costs</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Cloud
+              Migration and Infrastructure Management</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Secure Data
+              Storage Solutions</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Scalable and
+              Flexible Cloud Solutions</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Maximize Efficiency and Reduce
+              Costs</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="consultancy" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="consultancy" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/consultancy.jpg" alt="Consultancy Services" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/consultancy.jpg" alt="Consultancy Services"
+            class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="consultancy-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Consultancy Services</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Strategic Guidance for Digital Transformation</p>
-            <p class="mt-5" style="margin-top: 20px;">Our expert consultants provide strategic guidance and technical expertise to help you navigate the complexities of digital transformation and achieve your business goals.</p>
+          <h2 id="consultancy-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy"
+            style="margin-bottom: 10px;">Consultancy Services</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Strategic Guidance for Digital Transformation</p>
+          <p class="mt-5" style="margin-top: 20px;">Our expert consultants provide strategic guidance and technical
+            expertise to help you navigate the complexities of digital transformation and achieve your business goals.
+          </p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Expert Strategic Guidance</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Technical Expertise for Complex Challenges</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Navigating Digital Transformation</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Achieving Business Goals with Tailored Advice</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Expert
+              Strategic Guidance</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Technical
+              Expertise for Complex Challenges</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Navigating
+              Digital Transformation</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Achieving Business Goals with
+              Tailored Advice</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="training" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="training" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/training.jpg" alt="Management & Training" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/training.jpg" alt="Management & Training" class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="training-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Management & Training</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Empowering Your Team for the Digital Age</p>
-            <p class="mt-5" style="margin-top: 20px;">We provide comprehensive training programs and management services to help your team develop the skills and knowledge needed to succeed in the digital age.</p>
+          <h2 id="training-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">
+            Management & Training</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Empowering Your Team for the Digital Age</p>
+          <p class="mt-5" style="margin-top: 20px;">We provide comprehensive training programs and management services
+            to help your team develop the skills and knowledge needed to succeed in the digital age.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Comprehensive Training Programs</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Effective Management Services</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Skill Development for the Digital Era</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Success in a Rapidly Evolving Landscape</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">
+              Comprehensive Training Programs</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Effective
+              Management Services</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Skill
+              Development for the Digital Era</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Success in a Rapidly Evolving
+              Landscape</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="hr-outsourcing" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="hr-outsourcing" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/hr-outsourcing.jpg" alt="HR IT Outsourcing" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/hr-outsourcing.jpg" alt="HR IT Outsourcing"
+            class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="hr-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">HR IT Outsourcing</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Streamlining Your Human Resources Operations</p>
-            <p class="mt-5" style="margin-top: 20px;">We offer HR IT outsourcing services to streamline your HR processes, from payroll management to talent acquisition, allowing you to focus on your core business.</p>
+          <h2 id="hr-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">HR IT
+            Outsourcing</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Streamlining Your Human Resources Operations</p>
+          <p class="mt-5" style="margin-top: 20px;">We offer HR IT outsourcing services to streamline your HR processes,
+            from payroll management to talent acquisition, allowing you to focus on your core business.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Efficient Payroll Management</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Strategic Talent Acquisition</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Focus on Core Business Activities</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Optimized HR Processes</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Efficient
+              Payroll Management</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Strategic
+              Talent Acquisition</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Focus on
+              Core Business Activities</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Optimized HR Processes</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
-<section id="support" class="section-container">
-    <div class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+      </div>
+    </section>
+    <section id="support" class="section-container">
+      <div
+        class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
         <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img src="assets/img/support.jpg" alt="Technical Support & Maintenance" class="object-cover w-full h-full rounded-lg">
+          <img src="assets/img/support.jpg" alt="Technical Support & Maintenance"
+            class="object-cover w-full h-full rounded-lg">
         </div>
 
         <div class="solution-content flex-1 px-6 md:px-10">
-            <h2 id="support-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Technical Support & Maintenance</h2>
-            <p class="text-[1.1em] text-orange font-semibold">Reliable Support for Seamless Operations</p>
-            <p class="mt-5" style="margin-top: 20px;">Our dedicated support team provides reliable technical support and maintenance services to ensure your systems are always running smoothly and efficiently.</p>
+          <h2 id="support-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">
+            Technical Support & Maintenance</h2>
+          <p class="text-[1.1em] text-orange font-semibold">Reliable Support for Seamless Operations</p>
+          <p class="mt-5" style="margin-top: 20px;">Our dedicated support team provides reliable technical support and
+            maintenance services to ensure your systems are always running smoothly and efficiently.</p>
 
-            <ul class="feature-list list-none p-0 mt-5">
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Dedicated and Responsive Support Team</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Proactive Maintenance for Optimal Performance</li>
-                <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Ensuring System Smoothness and Efficiency</li>
-                <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Minimizing Downtime and Maximizing Productivity</li>
-            </ul>
+          <ul class="feature-list list-none p-0 mt-5">
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Dedicated
+              and Responsive Support Team</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Proactive
+              Maintenance for Optimal Performance</li>
+            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Ensuring
+              System Smoothness and Efficiency</li>
+            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Minimizing Downtime and Maximizing
+              Productivity</li>
+          </ul>
 
-            <a href="contact.html" class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition" style="margin-top: 20px;">Request a Demo</a>
+          <a href="contact.html"
+            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+            style="margin-top: 20px;">Request a Demo</a>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
   </main>
- 
- <!-- Footer (same on every page) -->
+
+  <!-- Footer (same on every page) -->
   <footer class="bg-navy text-white py-16">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
       <div>
-        <img src="assets/img/logo.png" class="h-14 mb-6"/>
+        <img src="assets/img/logo.png" class="h-14 mb-6" />
         <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
       </div>
       <div>
         <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
-        <ul class="space-y-2"><li><a href="about.html" class="hover:text-orange">About Us</a></li><li><a href="services.html" class="hover:text-orange">Services</a></li><li><a href="products.html" class="hover:text-orange">Products</a></li></ul>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="hover:text-orange">About Us</a></li>
+          <li><a href="services.html" class="hover:text-orange">Services</a></li>
+          <li><a href="products.html" class="hover:text-orange">Products</a></li>
+        </ul>
       </div>
       <div>
         <h4 class="font-bold text-yellow mb-4">Contact</h4>
@@ -333,9 +604,9 @@
       <div>
         <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
         <div class="flex space-x-4 text-3xl">
-          <a href="#" class="hover:text-orange">f</a>
-          <a href="#" class="hover:text-orange">t</a>
-          <a href="#" class="hover:text-orange">in</a>
+          <a href="#" class="hover:text-orange transition"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="hover:text-orange transition"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="hover:text-orange transition"><i class="fab fa-linkedin"></i></a>
         </div>
       </div>
     </div>
@@ -374,4 +645,21 @@
         y: 100, opacity: 0, duration: 1.2, ease: "power4.out", stagger: 0.2
       });
     });
+  </script>
+  <!-- Mobile menu JS -->
+  <script>
+    (function () {
+      const btn = document.getElementById('mobile-menu-button');
+      const panel = document.getElementById('mobile-menu');
+      const nav = document.querySelector('nav');
+      if (!btn || !panel || !nav) return;
+      let isOpen = false;
+      const getItems = () => panel.querySelectorAll('[role="menuitem"]');
+      function openMenu() { if (isOpen) return; panel.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); panel.setAttribute('aria-hidden', 'false'); const items = getItems(); if (items.length) items[0].focus(); document.body.classList.add('no-scroll'); document.addEventListener('click', outside); document.addEventListener('keydown', key); window.addEventListener('resize', resize); isOpen = true; }
+      function closeMenu() { if (!isOpen) return; panel.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); panel.setAttribute('aria-hidden', 'true'); document.body.classList.remove('no-scroll'); document.removeEventListener('click', outside); document.removeEventListener('keydown', key); window.removeEventListener('resize', resize); btn.focus(); isOpen = false; }
+      function outside(e) { if (!nav.contains(e.target) && !panel.contains(e.target)) closeMenu(); }
+      function key(e) { if (e.key === 'Escape') { closeMenu(); return; } if (e.key === 'Tab' && isOpen) { const items = Array.from(getItems()); if (!items.length) return; const first = items[0], last = items[items.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } } }
+      function resize() { if (window.innerWidth >= 768) closeMenu(); }
+      btn.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+    })();
   </script>
