@@ -15,6 +15,7 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -226,299 +227,419 @@
         display: none;
       }
     }
+
+    /* --- CUSTOM LOADER CSS --- */
+    #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader-content {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .orange-bar {
+      position: absolute;
+      width: 250px;
+      height: 80px;
+      background-color: #ff9900;
+      border-radius: 10px;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(calc(-50% - 75px), -50%);
+    }
+
+    .spinning-ring {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 30px solid transparent;
+      border-top: 30px solid #2c2c6c;
+      border-right: 30px solid #2c2c6c;
+      border-bottom: 30px solid #2c2c6c;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-text {
+      margin-top: 30px;
+      text-align: center;
+      color: #2c2c6c;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      animation: pulse 1.5s infinite ease-in-out;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      100% {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+    }
+
+    #content {
+      display: none;
+    }
   </style>
 </head>
 
 <body class="bg-white text-gray-900 overflow-x-hidden" style="zoom: 0.8;">
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
 
-  <a href="https://wa.me/256774310287" target="_blank"
-    class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
-    <i class="fab fa-whatsapp text-4xl"></i>
-  </a>
-
-  <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
-      <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
-        <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
-        <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
-
-        <!-- Services Dropdown -->
-        <div class="relative group">
-          <a href="services.html" class="hover:text-orange transition flex items-center">
-            Services
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </a>
-          <div
-            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-            <div class="p-2">
-              <a href="services.html#digital-content"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital
-                Content for Schools</a>
-              <a href="services.html#coding-robotics"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding &
-                Robotics</a>
-              <a href="services.html#software-dev"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software
-                Development</a>
-              <a href="services.html#cloud-services"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud
-                Services</a>
-              <a href="services.html#consultancy"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy
-                Services</a>
-              <a href="services.html#training"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management
-                & Training</a>
-              <a href="services.html#hr-outsourcing"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT
-                Outsourcing</a>
-              <a href="services.html#support"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical
-                Support & Maintenance</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Solutions Dropdown -->
-        <div class="relative group">
-          <a href="solutions.html" class="hover:text-orange transition flex items-center">
-            Solutions
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </a>
-          <div
-            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-            <div class="p-2">
-              <a href="solutions.html#smart-school"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart
-                School Solutions</a>
-              <a href="solutions.html#video-conference"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video
-                Conference Systems</a>
-              <a href="solutions.html#industry-solutions"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific
-                Custom Solutions</a>
-            </div>
-          </div>
-        </div>
-
-        <a href="products.html" class="relative hover-underline-grow text-orange font-bold">Products</a>
-        <a href="clients.html" class="relative hover-underline-grow hover:text-orange transition">Clients</a>
-      </div>
-      <!-- Mobile hamburger button -->
-      <button id="mobile-menu-button" class="hamburger md:hidden" aria-controls="mobile-menu" aria-expanded="false"
-        aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      <a href="clients.html"
-        class="hidden md:inline-block bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get
-        In Touch</a>
+  <div id="loader-wrapper">
+    <div class="loader-content">
+      <div class="orange-bar"></div>
+      <div class="spinning-ring"></div>
     </div>
-  </nav>
-
-  <!-- Mobile panel -->
-  <div id="mobile-menu" class="mobile-panel md:hidden" role="menu" aria-hidden="true">
-    <nav class="mobile-nav">
-      <ul>
-        <li><a href="index.html" role="menuitem" tabindex="-1">Home</a></li>
-        <li><a href="about.html" role="menuitem" tabindex="-1">About</a></li>
-        <li><a href="services.html" role="menuitem" tabindex="-1">Services</a></li>
-        <li><a href="solutions.html" role="menuitem" tabindex="-1">Solutions</a></li>
-        <li><a href="products.html" role="menuitem" tabindex="-1">Products</a></li>
-        <li><a href="clients.html" role="menuitem" tabindex="-1">Clients</a></li>
-      </ul>
-    </nav>
+    <div class="loader-text">Loading Products...</div>
   </div>
 
+  <div id="content">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
-  <main class="pt-24">
-    <section
-      class="py-24 pb-20 text-center bg-gradient-to-br from-navy via-purple-900 to-navy text-white relative overflow-hidden">
-      <img src="assets/img/circ.png" alt="Circuit Pattern"
-        class="absolute inset-0 w-full h-full object-cover opacity-40">
-      <div class="relative z-10">
-        <h1 class="text-6xl md:text-8xl font-black mb-6 h-screen font-serif" data-aos>Our Products</h1>
-        <p class="text-xl max-w-3xl mx-auto" data-aos>We supply only trusted global brands with full warranty and local
-          support</p>
+    <a href="https://wa.me/256774310287" target="_blank"
+      class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
+      <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
+
+    <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+        <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
+        <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
+          <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
+          <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
+
+          <!-- Services Dropdown -->
+          <div class="relative group">
+            <a href="services.html" class="hover:text-orange transition flex items-center">
+              Services
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div
+              class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+              <div class="p-2">
+                <a href="services.html#digital-content"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital
+                  Content for Schools</a>
+                <a href="services.html#coding-robotics"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding
+                  &
+                  Robotics</a>
+                <a href="services.html#software-dev"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software
+                  Development</a>
+                <a href="services.html#cloud-services"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud
+                  Services</a>
+                <a href="services.html#consultancy"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy
+                  Services</a>
+                <a href="services.html#training"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management
+                  & Training</a>
+                <a href="services.html#hr-outsourcing"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT
+                  Outsourcing</a>
+                <a href="services.html#support"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical
+                  Support & Maintenance</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Dropdown -->
+          <div class="relative group">
+            <a href="solutions.html" class="hover:text-orange transition flex items-center">
+              Solutions
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div
+              class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+              <div class="p-2">
+                <a href="solutions.html#smart-school"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart
+                  School Solutions</a>
+                <a href="solutions.html#video-conference"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video
+                  Conference Systems</a>
+                <a href="solutions.html#industry-solutions"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific
+                  Custom Solutions</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="products.html" class="relative hover-underline-grow text-orange font-bold">Products</a>
+          <a href="clients.html" class="relative hover-underline-grow hover:text-orange transition">Clients</a>
+        </div>
+        <!-- Mobile hamburger button -->
+        <button id="mobile-menu-button" class="hamburger md:hidden" aria-controls="mobile-menu" aria-expanded="false"
+          aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="clients.html"
+          class="hidden md:inline-block bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get
+          In Touch</a>
       </div>
-    </section>
+    </nav>
 
-    <section id="products-section" class="py-20 bg-gray-50">
-      <div class="max-w-7xl mx-auto">
-        <div class="marquee">
-          <div class="marquee-content flex space-x-8">
-            <!-- Products list duplicated for seamless looping -->
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Computers & Accessories</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Digital Cameras</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Interactive Screens</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Interactive Whiteboards</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Tablets</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Solar Power Products</h3>
-              <p class="text-center text-gray-500">(Inverters, Batteries)</p>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Power Backup Solutions</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Digital Signage</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">VoIP PBX Solutions</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Printers</h3>
-            </div>
-            <!-- Duplicate set for smooth animation -->
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Computers & Accessories</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Digital Cameras</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Interactive Screens</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Interactive Whiteboards</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Tablets</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Solar Power Products</h3>
-              <p class="text-center text-gray-500">(Inverters, Batteries)</p>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Power Backup Solutions</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Digital Signage</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">VoIP PBX Solutions</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
-              <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
-              <h3 class="text-xl font-bold text-center">Printers</h3>
+    <!-- Mobile panel -->
+    <div id="mobile-menu" class="mobile-panel md:hidden" role="menu" aria-hidden="true">
+      <nav class="mobile-nav">
+        <ul>
+          <li><a href="index.html" role="menuitem" tabindex="-1">Home</a></li>
+          <li><a href="about.html" role="menuitem" tabindex="-1">About</a></li>
+          <li><a href="services.html" role="menuitem" tabindex="-1">Services</a></li>
+          <li><a href="solutions.html" role="menuitem" tabindex="-1">Solutions</a></li>
+          <li><a href="products.html" role="menuitem" tabindex="-1">Products</a></li>
+          <li><a href="clients.html" role="menuitem" tabindex="-1">Clients</a></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <main class="pt-24">
+      <section
+        class="py-24 pb-20 text-center bg-gradient-to-br from-navy via-purple-900 to-navy text-white relative overflow-hidden">
+        <img src="assets/img/circ.png" alt="Circuit Pattern"
+          class="absolute inset-0 w-full h-full object-cover opacity-40">
+        <div class="relative z-10">
+          <h1 class="text-6xl md:text-8xl font-black mb-6 h-screen font-serif" data-aos>Our Products</h1>
+          <p class="text-xl max-w-3xl mx-auto" data-aos>We supply only trusted global brands with full warranty and
+            local
+            support</p>
+        </div>
+      </section>
+
+      <section id="products-section" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+          <div class="marquee">
+            <div class="marquee-content flex space-x-8">
+              <!-- Products list duplicated for seamless looping -->
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Computers & Accessories</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Digital Cameras</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Interactive Screens</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Interactive Whiteboards</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Tablets</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Solar Power Products</h3>
+                <p class="text-center text-gray-500">(Inverters, Batteries)</p>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Power Backup Solutions</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Digital Signage</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">VoIP PBX Solutions</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Printers</h3>
+              </div>
+              <!-- Duplicate set for smooth animation -->
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Computers & Accessories</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Digital Cameras</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Interactive Screens</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Interactive Whiteboards</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Tablets</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Solar Power Products</h3>
+                <p class="text-center text-gray-500">(Inverters, Batteries)</p>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Power Backup Solutions</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Digital Signage</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">VoIP PBX Solutions</h3>
+              </div>
+              <div class="bg-white rounded-3xl p-10 shadow-xl flex-shrink-0 w-80">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-center">Printers</h3>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Footer (same) -->
-    <footer class="bg-navy text-white py-16">
-      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
-        <div><img src="assets/img/logo.png" class="h-14 mb-6" />
-          <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
+      <!-- Footer (same) -->
+      <footer class="bg-navy text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+          <div><img src="assets/img/logo.png" class="h-14 mb-6" />
+            <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li><a href="about.html" class="hover:text-orange">About</a></li>
+              <li><a href="services.html" class="hover:text-orange">Services</a></li>
+              <li><a href="products.html" class="hover:text-orange">Products</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-yellow mb-4">Contact</h4>
+            <p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala<br>+256 774 310
+              287<br>sales@kaninnovativesolutions.com</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
+            <div class="flex space-x-4 text-3xl"><a href="#" class="hover:text-orange transition"><i
+                  class="fab fa-facebook"></i></a><a href="#" class="hover:text-orange transition"><i
+                  class="fab fa-twitter"></i></a><a href="#" class="hover:text-orange transition"><i
+                  class="fab fa-linkedin"></i></a></div>
+          </div>
         </div>
-        <div>
-          <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
-          <ul class="space-y-2">
-            <li><a href="about.html" class="hover:text-orange">About</a></li>
-            <li><a href="services.html" class="hover:text-orange">Services</a></li>
-            <li><a href="products.html" class="hover:text-orange">Products</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-bold text-yellow mb-4">Contact</h4>
-          <p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala<br>+256 774 310
-            287<br>sales@kaninnovativesolutions.com</p>
-        </div>
-        <div>
-          <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
-          <div class="flex space-x-4 text-3xl"><a href="#" class="hover:text-orange transition"><i
-                class="fab fa-facebook"></i></a><a href="#" class="hover:text-orange transition"><i
-                class="fab fa-twitter"></i></a><a href="#" class="hover:text-orange transition"><i
-                class="fab fa-linkedin"></i></a></div>
-        </div>
-      </div>
-      <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
-    </footer>
+        <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
+      </footer>
+  </div>
 
-    <script>
-      const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-      function raf(t) { lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
-      const cursor = document.querySelector('.cursor'), follower = document.querySelector('.cursor-follower');
-      document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; follower.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
-      document.querySelectorAll('.magnetic').forEach(b => { b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; gsap.to(b, { x: x * .4, y: y * .4, duration: .8, ease: "power3.out" }) }); b.addEventListener('mouseleave', () => { gsap.to(b, { x: 0, y: 0, duration: .8 }) }) });
+  <script>
+    const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(t) { lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+    const cursor = document.querySelector('.cursor'), follower = document.querySelector('.cursor-follower');
+    document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; follower.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
+    document.querySelectorAll('.magnetic').forEach(b => { b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; gsap.to(b, { x: x * .4, y: y * .4, duration: .8, ease: "power3.out" }) }); b.addEventListener('mouseleave', () => { gsap.to(b, { x: 0, y: 0, duration: .8 }) }) });
 
-      // Marquee Intersection Observer
-      const marquee = document.querySelector('.marquee-content');
-      const productsSection = document.getElementById('products-section');
+    // Marquee Intersection Observer
+    const marquee = document.querySelector('.marquee-content');
+    const productsSection = document.getElementById('products-section');
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            marquee.classList.add('scrolling');
-          } else {
-            marquee.classList.remove('scrolling');
-          }
-        });
-      }, {
-        threshold: 0.1 // Triggers when 10% of the element is visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          marquee.classList.add('scrolling');
+        } else {
+          marquee.classList.remove('scrolling');
+        }
       });
+    }, {
+      threshold: 0.1 // Triggers when 10% of the element is visible
+    });
 
-      observer.observe(productsSection);
-    </script>
-    <!-- Mobile menu JS -->
-    <script>
-      (function () {
-        const btn = document.getElementById('mobile-menu-button');
-        const panel = document.getElementById('mobile-menu');
-        const nav = document.querySelector('nav');
-        if (!btn || !panel || !nav) return;
-        let isOpen = false;
-        const getItems = () => panel.querySelectorAll('[role="menuitem"]');
-        function openMenu() { if (isOpen) return; panel.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); panel.setAttribute('aria-hidden', 'false'); const items = getItems(); if (items.length) items[0].focus(); document.body.classList.add('no-scroll'); document.addEventListener('click', outside); document.addEventListener('keydown', key); window.addEventListener('resize', resize); isOpen = true; }
-        function closeMenu() { if (!isOpen) return; panel.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); panel.setAttribute('aria-hidden', 'true'); document.body.classList.remove('no-scroll'); document.removeEventListener('click', outside); document.removeEventListener('keydown', key); window.removeEventListener('resize', resize); btn.focus(); isOpen = false; }
-        function outside(e) { if (!nav.contains(e.target) && !panel.contains(e.target)) closeMenu(); }
-        function key(e) { if (e.key === 'Escape') { closeMenu(); return; } if (e.key === 'Tab' && isOpen) { const items = Array.from(getItems()); if (!items.length) return; const first = items[0], last = items[items.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } } }
-        function resize() { if (window.innerWidth >= 768) closeMenu(); }
-        btn.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
-      })();
-    </script>
+    observer.observe(productsSection);
+  </script>
+  <!-- Mobile menu JS -->
+  <script>
+    (function () {
+      const btn = document.getElementById('mobile-menu-button');
+      const panel = document.getElementById('mobile-menu');
+      const nav = document.querySelector('nav');
+      if (!btn || !panel || !nav) return;
+      let isOpen = false;
+      const getItems = () => panel.querySelectorAll('[role="menuitem"]');
+      function openMenu() { if (isOpen) return; panel.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); panel.setAttribute('aria-hidden', 'false'); const items = getItems(); if (items.length) items[0].focus(); document.body.classList.add('no-scroll'); document.addEventListener('click', outside); document.addEventListener('keydown', key); window.addEventListener('resize', resize); isOpen = true; }
+      function closeMenu() { if (!isOpen) return; panel.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); panel.setAttribute('aria-hidden', 'true'); document.body.classList.remove('no-scroll'); document.removeEventListener('click', outside); document.removeEventListener('keydown', key); window.removeEventListener('resize', resize); btn.focus(); isOpen = false; }
+      function outside(e) { if (!nav.contains(e.target) && !panel.contains(e.target)) closeMenu(); }
+      function key(e) { if (e.key === 'Escape') { closeMenu(); return; } if (e.key === 'Tab' && isOpen) { const items = Array.from(getItems()); if (!items.length) return; const first = items[0], last = items[items.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } } }
+      function resize() { if (window.innerWidth >= 768) closeMenu(); }
+      btn.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+    })();
+
+    // Hide the loader when the page is fully loaded
+    window.addEventListener('load', function () {
+      const loaderWrapper = document.getElementById('loader-wrapper');
+      const content = document.getElementById('content');
+
+      setTimeout(function () {
+        loaderWrapper.style.display = 'none';
+        content.style.display = 'block';
+        // Refresh ScrollTrigger if available to recalculate positions after display change
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+      }, 2000); // 2 seconds delay
+    });
+  </script>
 </body>
 
 </html>
+```

@@ -17,6 +17,7 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -188,256 +189,364 @@
         display: none;
       }
     }
+
+    /* --- CUSTOM LOADER CSS --- */
+    #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader-content {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .orange-bar {
+      position: absolute;
+      width: 250px;
+      height: 80px;
+      background-color: #ff9900;
+      border-radius: 10px;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(calc(-50% - 75px), -50%);
+    }
+
+    .spinning-ring {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 30px solid transparent;
+      border-top: 30px solid #2c2c6c;
+      border-right: 30px solid #2c2c6c;
+      border-bottom: 30px solid #2c2c6c;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-text {
+      margin-top: 30px;
+      text-align: center;
+      color: #2c2c6c;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      animation: pulse 1.5s infinite ease-in-out;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      100% {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+    }
+
+    #content {
+      display: none;
+    }
   </style>
 </head>
 
 <body class="bg-white text-gray-900 overflow-x-hidden" style="zoom: 0.8;">
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
 
-  <a href="https://wa.me/256774310287" target="_blank"
-    class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
-    <i class="fab fa-whatsapp text-4xl"></i>
-  </a>
-
-  <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
-      <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
-        <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
-        <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
-
-        <!-- Services Dropdown -->
-        <div class="relative group">
-          <a href="services.html" class="hover:text-orange transition flex items-center">
-            Services
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </a>
-          <div
-            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-            <div class="p-2">
-              <a href="services.html#digital-content"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital
-                Content for Schools</a>
-              <a href="services.html#coding-robotics"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding &
-                Robotics</a>
-              <a href="services.html#software-dev"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software
-                Development</a>
-              <a href="services.html#cloud-services"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud
-                Services</a>
-              <a href="services.html#consultancy"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy
-                Services</a>
-              <a href="services.html#training"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management
-                & Training</a>
-              <a href="services.html#hr-outsourcing"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT
-                Outsourcing</a>
-              <a href="services.html#support"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical
-                Support & Maintenance</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Solutions Dropdown -->
-        <div class="relative group">
-          <a href="solutions.html" class="relative hover-underline-grow text-orange font-bold flex items-center">
-            Solutions
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </a>
-          <div
-            class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-            <div class="p-2">
-              <a href="solutions.html#smart-school"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart
-                School Solutions</a>
-              <a href="solutions.html#video-conference"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video
-                Conference Systems</a>
-              <a href="solutions.html#industry-solutions"
-                class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific
-                Custom Solutions</a>
-            </div>
-          </div>
-        </div>
-
-        <a href="products.html" class="relative hover-underline-grow hover:text-orange transition">Products</a>
-        <a href="clients.html" class="relative hover-underline-grow hover:text-orange transition">Clients</a>
-      </div>
-      <!-- Mobile hamburger button -->
-      <button id="mobile-menu-button" class="hamburger md:hidden" aria-controls="mobile-menu" aria-expanded="false"
-        aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      <a href="clients.html"
-        class="hidden md:inline-block bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get
-        In
-        Touch</a>
+  <div id="loader-wrapper">
+    <div class="loader-content">
+      <div class="orange-bar"></div>
+      <div class="spinning-ring"></div>
     </div>
-  </nav>
-
-  <!-- Mobile panel -->
-  <div id="mobile-menu" class="mobile-panel md:hidden" role="menu" aria-hidden="true">
-    <nav class="mobile-nav">
-      <ul>
-        <li><a href="index.html" role="menuitem" tabindex="-1">Home</a></li>
-        <li><a href="about.html" role="menuitem" tabindex="-1">About</a></li>
-        <li><a href="services.html" role="menuitem" tabindex="-1">Services</a></li>
-        <li><a href="solutions.html" role="menuitem" tabindex="-1">Solutions</a></li>
-        <li><a href="products.html" role="menuitem" tabindex="-1">Products</a></li>
-        <li><a href="clients.html" role="menuitem" tabindex="-1">Clients</a></li>
-      </ul>
-    </nav>
+    <div class="loader-text">Loading Solutions...</div>
   </div>
 
+  <div id="content">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
+    <a href="https://wa.me/256774310287" target="_blank"
+      class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
+      <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
 
-  <main class="pt-24">
-    <section id="smart-school" class="section-container">
-      <div
-        class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
-        <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-          <img src="assets/img/smart-classroom.jpg" alt="Smart School" class="object-cover w-full h-full rounded-lg">
+    <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+        <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
+        <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
+          <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
+          <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
+
+          <!-- Services Dropdown -->
+          <div class="relative group">
+            <a href="services.html" class="hover:text-orange transition flex items-center">
+              Services
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div
+              class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+              <div class="p-2">
+                <a href="services.html#digital-content"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Digital
+                  Content for Schools</a>
+                <a href="services.html#coding-robotics"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Coding
+                  &
+                  Robotics</a>
+                <a href="services.html#software-dev"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Software
+                  Development</a>
+                <a href="services.html#cloud-services"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Cloud
+                  Services</a>
+                <a href="services.html#consultancy"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Consultancy
+                  Services</a>
+                <a href="services.html#training"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Management
+                  & Training</a>
+                <a href="services.html#hr-outsourcing"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">HR IT
+                  Outsourcing</a>
+                <a href="services.html#support"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Technical
+                  Support & Maintenance</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Dropdown -->
+          <div class="relative group">
+            <a href="solutions.html" class="relative hover-underline-grow text-orange font-bold flex items-center">
+              Solutions
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div
+              class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-100/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
+              <div class="p-2">
+                <a href="solutions.html#smart-school"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Smart
+                  School Solutions</a>
+                <a href="solutions.html#video-conference"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Video
+                  Conference Systems</a>
+                <a href="solutions.html#industry-solutions"
+                  class="relative hover-underline-grow block px-4 py-2 text-gray-800 hover:text-navy rounded-md">Industry-Specific
+                  Custom Solutions</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="products.html" class="relative hover-underline-grow hover:text-orange transition">Products</a>
+          <a href="clients.html" class="relative hover-underline-grow hover:text-orange transition">Clients</a>
         </div>
-
-        <div class="solution-content flex-1 px-6 md:px-10">
-          <h2 id="school" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Smart
-            School Solutions</h2>
-          <p class="text-[1.1em] text-orange font-semibold">Setting New Standards for Intelligent Campuses</p>
-          <p class="mt-5" style="margin-top: 20px;">We provide a comprehensive Smart School solution that transforms
-            traditional classrooms into modern, interactive learning environments. Our platform offers centralized
-            control over all classroom devices, including interactive whiteboards, projectors, and lighting, creating a
-            seamless and engaging experience for both teachers and students.</p>
-
-          <ul class="feature-list list-none p-0 mt-5">
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Centralized
-              Platform for Device Control</li>
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Automated
-              Facility Management</li>
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Seamless
-              Multimedia Systems Integration</li>
-            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Supports Smart, Sustainable, and
-              Intelligent Campuses</li>
-          </ul>
-
-          <a href="contact.html"
-            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
-            style="margin-top: 20px;">Request a Demo</a>
-        </div>
+        <!-- Mobile hamburger button -->
+        <button id="mobile-menu-button" class="hamburger md:hidden" aria-controls="mobile-menu" aria-expanded="false"
+          aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="clients.html"
+          class="hidden md:inline-block bg-orange text-white px-8 py-3 rounded-full font-bold hover:bg-yellow transition magnetic">Get
+          In
+          Touch</a>
       </div>
-    </section>
-    <section id="video-conference" class="section-container">
-      <div
-        class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
-        <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-          <img src="assets/img/video-conference.jpg" alt="Video Conference"
-            class="object-cover w-full h-full rounded-lg">
-        </div>
+    </nav>
 
-        <div class="solution-content flex-1 px-6 md:px-10">
-          <h2 id="video-conference-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy"
-            style="margin-bottom: 10px;">Video Conference Systems</h2>
-          <p class="text-[1.1em] text-orange font-semibold">Enhancing Communication and Collaboration</p>
-          <p class="mt-5" style="margin-top: 20px;">Our state-of-the-art video conference systems enable seamless
-            communication and collaboration, whether for remote learning, business meetings, or virtual events. We offer
-            high-definition video and crystal-clear audio, ensuring a professional and productive experience.</p>
-
-          <ul class="feature-list list-none p-0 mt-5">
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Seamless
-              Communication and Collaboration</li>
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">
-              High-Definition Video and Crystal-Clear Audio</li>
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Ideal for
-              Remote Learning, Meetings, Events</li>
-            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Professional and Productive
-              Experience</li>
-          </ul>
-
-          <a href="contact.html"
-            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
-            style="margin-top: 20px;">Request a Demo</a>
-        </div>
-      </div>
-    </section>
-    <section id="industry-solutions" class="section-container">
-      <div
-        class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
-        <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
-          <img src="assets/img/industry-solutions.jpg" alt="Industry Solutions"
-            class="object-cover w-full h-full rounded-lg">
-        </div>
-
-        <div class="solution-content flex-1 px-6 md:px-10">
-          <h2 id="industry-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">
-            Industry-Specific Custom Solutions</h2>
-          <p class="text-[1.1em] text-orange font-semibold">Tailored Solutions for Unique Business Needs</p>
-          <p class="mt-5" style="margin-top: 20px;">We understand that every industry has unique challenges and
-            requirements. That's why we offer custom-developed solutions tailored to your specific needs. From
-            healthcare to finance, we can design and build a solution that helps you achieve your business objectives.
-          </p>
-
-          <ul class="feature-list list-none p-0 mt-5">
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">
-              Custom-Developed Solutions</li>
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Tailored to
-              Specific Industry Requirements</li>
-            <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Designed for
-              Various Sectors (Healthcare, Finance, etc.)</li>
-            <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Achieve Your Business Objectives
-            </li>
-          </ul>
-
-          <a href="contact.html"
-            class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
-            style="margin-top: 20px;">Request a Demo</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-navy text-white py-16">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
-      <div><img src="assets/img/logo.png" class="h-14 mb-6" />
-        <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
-      </div>
-      <div>
-        <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
-        <ul class="space-y-2">
-          <li><a href="about.html" class="hover:text-orange">About</a></li>
-          <li><a href="services.html" class="hover:text-orange">Services</a></li>
-          <li><a href="products.html" class="hover:text-orange">Products</a></li>
+    <!-- Mobile panel -->
+    <div id="mobile-menu" class="mobile-panel md:hidden" role="menu" aria-hidden="true">
+      <nav class="mobile-nav">
+        <ul>
+          <li><a href="index.html" role="menuitem" tabindex="-1">Home</a></li>
+          <li><a href="about.html" role="menuitem" tabindex="-1">About</a></li>
+          <li><a href="services.html" role="menuitem" tabindex="-1">Services</a></li>
+          <li><a href="solutions.html" role="menuitem" tabindex="-1">Solutions</a></li>
+          <li><a href="products.html" role="menuitem" tabindex="-1">Products</a></li>
+          <li><a href="clients.html" role="menuitem" tabindex="-1">Clients</a></li>
         </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-yellow mb-4">Contact</h4>
-        <p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala<br>+256 774 310
-          287<br>sales@kaninnovativesolutions.com</p>
-      </div>
-      <div>
-        <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
-        <div class="flex space-x-4 text-3xl"><a href="#" class="hover:text-orange transition"><i
-              class="fab fa-facebook"></i></a><a href="#" class="hover:text-orange transition"><i
-              class="fab fa-twitter"></i></a><a href="#" class="hover:text-orange transition"><i
-              class="fab fa-linkedin"></i></a></div>
-      </div>
+      </nav>
     </div>
-    <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
-  </footer>
+
+
+
+    <main class="pt-24">
+      <section id="smart-school" class="section-container">
+        <div
+          class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+          <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
+            <img src="assets/img/smart-classroom.jpg" alt="Smart School" class="object-cover w-full h-full rounded-lg">
+          </div>
+
+          <div class="solution-content flex-1 px-6 md:px-10">
+            <h2 id="school" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">Smart
+              School Solutions</h2>
+            <p class="text-[1.1em] text-orange font-semibold">Setting New Standards for Intelligent Campuses</p>
+            <p class="mt-5" style="margin-top: 20px;">We provide a comprehensive Smart School solution that transforms
+              traditional classrooms into modern, interactive learning environments. Our platform offers centralized
+              control over all classroom devices, including interactive whiteboards, projectors, and lighting, creating
+              a
+              seamless and engaging experience for both teachers and students.</p>
+
+            <ul class="feature-list list-none p-0 mt-5">
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">
+                Centralized
+                Platform for Device Control</li>
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Automated
+                Facility Management</li>
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Seamless
+                Multimedia Systems Integration</li>
+              <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Supports Smart, Sustainable, and
+                Intelligent Campuses</li>
+            </ul>
+
+            <a href="contact.html"
+              class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+              style="margin-top: 20px;">Request a Demo</a>
+          </div>
+        </div>
+      </section>
+      <section id="video-conference" class="section-container">
+        <div
+          class="solution-block flex flex-col md:flex-row-reverse items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+          <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
+            <img src="assets/img/video-conference.jpg" alt="Video Conference"
+              class="object-cover w-full h-full rounded-lg">
+          </div>
+
+          <div class="solution-content flex-1 px-6 md:px-10">
+            <h2 id="video-conference-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy"
+              style="margin-bottom: 10px;">Video Conference Systems</h2>
+            <p class="text-[1.1em] text-orange font-semibold">Enhancing Communication and Collaboration</p>
+            <p class="mt-5" style="margin-top: 20px;">Our state-of-the-art video conference systems enable seamless
+              communication and collaboration, whether for remote learning, business meetings, or virtual events. We
+              offer
+              high-definition video and crystal-clear audio, ensuring a professional and productive experience.</p>
+
+            <ul class="feature-list list-none p-0 mt-5">
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Seamless
+                Communication and Collaboration</li>
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">
+                High-Definition Video and Crystal-Clear Audio</li>
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Ideal for
+                Remote Learning, Meetings, Events</li>
+              <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Professional and Productive
+                Experience</li>
+            </ul>
+
+            <a href="contact.html"
+              class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+              style="margin-top: 20px;">Request a Demo</a>
+          </div>
+        </div>
+      </section>
+      <section id="industry-solutions" class="section-container">
+        <div
+          class="solution-block flex flex-col md:flex-row items-center text-left mb-10 p-10 rounded-lg shadow-md bg-white">
+          <div class="solution-image min-w-[400px] h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
+            <img src="assets/img/industry-solutions.jpg" alt="Industry Solutions"
+              class="object-cover w-full h-full rounded-lg">
+          </div>
+
+          <div class="solution-content flex-1 px-6 md:px-10">
+            <h2 id="industry-h2" class="mb-2 text-2xl md:text-[2.2em] font-bold text-navy" style="margin-bottom: 10px;">
+              Industry-Specific Custom Solutions</h2>
+            <p class="text-[1.1em] text-orange font-semibold">Tailored Solutions for Unique Business Needs</p>
+            <p class="mt-5" style="margin-top: 20px;">We understand that every industry has unique challenges and
+              requirements. That's why we offer custom-developed solutions tailored to your specific needs. From
+              healthcare to finance, we can design and build a solution that helps you achieve your business objectives.
+            </p>
+
+            <ul class="feature-list list-none p-0 mt-5">
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">
+                Custom-Developed Solutions</li>
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Tailored
+                to
+                Specific Industry Requirements</li>
+              <li class="py-2 text-[1.1em] border-b border-dashed" style="border-color: rgba(20,52,104,0.1);">Designed
+                for
+                Various Sectors (Healthcare, Finance, etc.)</li>
+              <li class="py-2 text-[1.1em]" style="border-color: rgba(20,52,104,0.1);">Achieve Your Business Objectives
+              </li>
+            </ul>
+
+            <a href="contact.html"
+              class="cta-primary inline-block mt-5 px-6 py-3 bg-orange text-white rounded-md font-bold hover:bg-yellow transition"
+              style="margin-top: 20px;">Request a Demo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-16">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+        <div><img src="assets/img/logo.png" class="h-14 mb-6" />
+          <p>Delivering world-class technology solutions across Uganda and East Africa.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-yellow mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="hover:text-orange">About</a></li>
+            <li><a href="services.html" class="hover:text-orange">Services</a></li>
+            <li><a href="products.html" class="hover:text-orange">Products</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-yellow mb-4">Contact</h4>
+          <p>Kyambogo Lower Estate Plot 5,<br>Essex Gardens, Kampala<br>+256 774 310
+            287<br>sales@kaninnovativesolutions.com</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-yellow mb-4">Follow Us</h4>
+          <div class="flex space-x-4 text-3xl"><a href="#" class="hover:text-orange transition"><i
+                class="fab fa-facebook"></i></a><a href="#" class="hover:text-orange transition"><i
+                class="fab fa-twitter"></i></a><a href="#" class="hover:text-orange transition"><i
+                class="fab fa-linkedin"></i></a></div>
+        </div>
+      </div>
+      <div class="text-center mt-12 text-sm">© 2024 KAN Innovative Solutions Ltd. All rights reserved.</div>
+    </footer>
+  </div>
 
   <script>
     const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
@@ -463,6 +572,21 @@
       function resize() { if (window.innerWidth >= 768) closeMenu(); }
       btn.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
     })();
+
+    // Hide the loader when the page is fully loaded
+    window.addEventListener('load', function () {
+      const loaderWrapper = document.getElementById('loader-wrapper');
+      const content = document.getElementById('content');
+
+      setTimeout(function () {
+        loaderWrapper.style.display = 'none';
+        content.style.display = 'block';
+        // Refresh ScrollTrigger if available to recalculate positions after display change
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+      }, 2000); // 2 seconds delay
+    });
   </script>
 </body>
 
