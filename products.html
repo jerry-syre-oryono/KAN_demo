@@ -342,7 +342,7 @@
 
     <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
       <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-        <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
+        <a href="index.html"><img src="assets/img/kan_new.png" alt="KAN Logo" class="h-16 md:h-14" /></a>
         <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
           <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
           <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
@@ -449,7 +449,7 @@
       <section
         class="py-24 pb-20 text-center bg-gradient-to-br from-navy via-purple-900 to-navy text-white relative overflow-hidden">
         <img src="assets/img/circ.png" alt="Circuit Pattern"
-          class="absolute inset-0 w-full h-full object-cover opacity-40">
+          class="parallax-bg absolute inset-0 w-full h-full object-cover opacity-40">
         <div class="relative z-10">
           <h1 class="text-6xl md:text-8xl font-black mb-6 h-screen font-serif" data-aos>Our Products</h1>
           <p class="text-xl max-w-3xl mx-auto" data-aos>We supply only trusted global brands with full warranty and
@@ -589,6 +589,58 @@
     document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; follower.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
     document.querySelectorAll('.magnetic').forEach(b => { b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; gsap.to(b, { x: x * .4, y: y * .4, duration: .8, ease: "power3.out" }) }); b.addEventListener('mouseleave', () => { gsap.to(b, { x: 0, y: 0, duration: .8 }) }) });
 
+    // Function to initialize animations after content is visible
+    function initAnimations() {
+      // Parallax Effects
+      gsap.utils.toArray('.parallax-bg').forEach(bg => {
+        gsap.to(bg, {
+          yPercent: 20, // Move background slower
+          ease: "none",
+          scrollTrigger: {
+            trigger: bg.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+      });
+
+      // Staggered Reveal for Sections
+      // Automatically finds lists/grids and staggers them
+      const staggerGroups = document.querySelectorAll('.grid, .space-y-4, .feature-list');
+      staggerGroups.forEach(group => {
+        // Get direct children
+        const children = group.children;
+        if (children.length > 0) {
+          gsap.from(children, {
+            scrollTrigger: {
+              trigger: group,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out"
+          });
+        }
+      });
+
+      // Enhanced Single Element Reveal (keeping data-aos)
+      gsap.utils.toArray('[data-aos]').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 85%" },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out"
+        });
+      });
+
+      ScrollTrigger.refresh();
+    }
+
     // Marquee Intersection Observer
     const marquee = document.querySelector('.marquee-content');
     const productsSection = document.getElementById('products-section');
@@ -632,9 +684,10 @@
       setTimeout(function () {
         loaderWrapper.style.display = 'none';
         content.style.display = 'block';
-        // Refresh ScrollTrigger if available to recalculate positions after display change
-        if (typeof ScrollTrigger !== 'undefined') {
-          ScrollTrigger.refresh();
+
+        // Initialize animations now that content is visible
+        if (typeof initAnimations === 'function') {
+          initAnimations();
         }
       }, 2000); // 2 seconds delay
     });

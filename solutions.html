@@ -304,7 +304,7 @@
 
     <nav class="fixed top-0 w-full z-40 glass-nav border-b border-gray-100">
       <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-        <a href="index.html"><img src="assets/img/logo2.png" alt="KAN Logo" class="h-14 md:h-14" /></a>
+        <a href="index.html"><img src="assets/img/kan_new.png" alt="KAN Logo" class="h-16 md:h-14" /></a>
         <div class="hidden md:flex items-center space-x-8 text-lg font-medium">
           <a href="index.html" class="relative hover-underline-grow hover:text-orange transition">Home</a>
           <a href="about.html" class="relative hover-underline-grow hover:text-orange transition">About</a>
@@ -554,7 +554,57 @@
     const cursor = document.querySelector('.cursor'), follower = document.querySelector('.cursor-follower');
     document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; follower.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
     document.querySelectorAll('.magnetic').forEach(b => { b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; gsap.to(b, { x: x * .4, y: y * .4, duration: .8, ease: "power3.out" }) }); b.addEventListener('mouseleave', () => { gsap.to(b, { x: 0, y: 0, duration: .8 }) }) });
-    gsap.utils.toArray('[data-aos]').forEach(el => { gsap.from(el, { scrollTrigger: { trigger: el, start: "top 80%" }, y: 100, opacity: 0, duration: 1.2, ease: "power4.out", stagger: 0.2 }) });
+    // Function to initialize animations after content is visible
+    function initAnimations() {
+      // Parallax Effects
+      gsap.utils.toArray('.parallax-bg').forEach(bg => {
+        gsap.to(bg, {
+          yPercent: 20, // Move background slower
+          ease: "none",
+          scrollTrigger: {
+            trigger: bg.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+      });
+
+      // Staggered Reveal for Sections
+      // Automatically finds lists/grids and staggers them
+      const staggerGroups = document.querySelectorAll('.grid, .space-y-4, .feature-list');
+      staggerGroups.forEach(group => {
+        // Get direct children
+        const children = group.children;
+        if (children.length > 0) {
+          gsap.from(children, {
+            scrollTrigger: {
+              trigger: group,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out"
+          });
+        }
+      });
+
+      // Enhanced Single Element Reveal (keeping data-aos)
+      gsap.utils.toArray('[data-aos]').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 85%" },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out"
+        });
+      });
+
+      ScrollTrigger.refresh();
+    }
   </script>
   <!-- Mobile menu JS -->
   <script>
@@ -581,9 +631,10 @@
       setTimeout(function () {
         loaderWrapper.style.display = 'none';
         content.style.display = 'block';
-        // Refresh ScrollTrigger if available to recalculate positions after display change
-        if (typeof ScrollTrigger !== 'undefined') {
-          ScrollTrigger.refresh();
+
+        // Initialize animations now that content is visible
+        if (typeof initAnimations === 'function') {
+          initAnimations();
         }
       }, 2000); // 2 seconds delay
     });
